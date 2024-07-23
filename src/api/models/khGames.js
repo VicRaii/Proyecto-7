@@ -4,10 +4,11 @@ const khGamesSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     img: { type: String, required: true },
-    score: { type: Number, required: true },
+    score: { type: Number, type: String, required: true },
     year: { type: Number, required: true },
+    description: { type: String },
     category: {
-      type: String,
+      type: [String],
       required: true,
       enum: ["Action-RPG", "JRPG", "Rol", "Musical", "Virtual-Reality"],
     },

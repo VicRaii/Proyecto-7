@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "khGamesSeed": "node ./src/utils/seeds/khGames.js",
+    "khPlatformsSeed": "node ./src/utils/seeds/khPlatforms.js"
   },
   "keywords": [],
   "author": "",
