@@ -4,7 +4,7 @@ const khPlatformSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     img: { type: String, required: true },
-    games: [{ type: mongoose.Types.ObjectId, ref: "khGames", required: false }],
+    Games: [{ type: mongoose.Types.ObjectId, ref: "Games", required: false }],
   },
   {
     timestamps: true,

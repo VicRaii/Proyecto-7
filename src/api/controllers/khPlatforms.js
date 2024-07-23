@@ -29,64 +29,24 @@ const postPlatforms = async (req, res, next) => {
   }
 };
 
-const mongoose = require("mongoose");
-
+//! REVISAR ANTES DE ENTREGAR
 const updatePlatform = async (req, res, next) => {
   try {
     const { id } = req.params;
-
-    // Verificar si el ID proporcionado es válido
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ message: "Invalid ID format" });
-    }
-
-    // Intentar encontrar la plataforma antigua
     const oldPlatform = await khPlatform.findById(id);
-    if (!oldPlatform) {
-      return res.status(404).json({ message: "Platform not found" });
-    }
 
-    // Verificar que req.body.games sea un array
-    if (!Array.isArray(req.body)) {
-      return res
-        .status(400)
-        .json({ message: "'games' field must be an array" });
-    }
+    const newPlatform = new khPlatform(req.body);
+    newPlatform._id = id;
+    newPlatform.Games = [...oldPlatform.Games, ...req.body.Games];
 
-    // Combinar juegos antiguos y nuevos, eliminando duplicados
-    const allGames = [...new Set([...oldPlatform.games, ...req.body.games])];
-
-    // Crear un objeto con los datos actualizados
-    const updateData = { ...req.body, games: allGames };
-
-    // Actualizar la plataforma en la base de datos
-    const platformUpdated = await khPlatform.findByIdAndUpdate(id, updateData, {
-      new: true,
-      runValidators: true,
-    });
-
-    if (!platformUpdated) {
-      return res.status(404).json({ message: "Failed to update platform" });
-    }
-
+    const platformUpdated = await khPlatform.findByIdAndUpdate(
+      id,
+      newPlatform,
+      { new: true }
+    );
     return res.status(200).json(platformUpdated);
   } catch (error) {
-    // Log del error para depuración
-    console.error("Error updating platform:", error);
-
-    if (error.name === "ValidationError") {
-      return res
-        .status(400)
-        .json({ message: "Validation Error", details: error.errors });
-    }
-
-    if (error.name === "MongoError" && error.code === 11000) {
-      return res
-        .status(409)
-        .json({ message: "Duplicate key error", details: error.keyValue });
-    }
-
-    return res.status(500).json({ message: "Internal Server Error", error });
+    return res.status(404).json("Error updating platform");
   }
 };
 

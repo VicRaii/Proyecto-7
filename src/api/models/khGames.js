@@ -16,9 +16,13 @@ const khGamesSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "games",
+    collection: "Games",
   }
 );
 
-const KingdomHeartsGames = mongoose.model("games", khGamesSchema, "games");
+const KingdomHeartsGames = mongoose.model(
+  "KingdomHeartsGames",
+  khGamesSchema,
+  "KingdomHeartsGames"
+);
 module.exports = KingdomHeartsGames;
