@@ -13,7 +13,7 @@ connectDB();
 
 app.use("/api/v1/khPlatforms", khPlatformRouter);
 app.use("/api/v1/khGames", khGamesRouter);
-app.use("/api/v1/users", usersRouter);
+// app.use("/api/v1/users", usersRouter);
 
 app.use("*", (req, res, next) => {
   return res.status(404).json("Route not found");

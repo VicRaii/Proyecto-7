@@ -1,7 +1,7 @@
 require("dotenv").config();
 const mongoose = require("mongoose");
-const khPlatform = require("../../api/models/khPlatforms");
 const khPlatforms = require("../../api/data/khPlatforms");
+const KingdomHeartsPlatforms = require("../../api/models/khPlatforms");
 
 const launchSeed = async () => {
   try {
@@ -9,10 +9,10 @@ const launchSeed = async () => {
     await mongoose.connect(process.env.DB_URL);
     console.log("Connected to MongoDB");
 
-    await khPlatform.collection.drop();
+    await KingdomHeartsPlatforms.collection.drop();
     console.log("Platforms dropped");
 
-    await khPlatform.insertMany(khPlatforms);
+    await KingdomHeartsPlatforms.insertMany(khPlatforms);
     console.log("Platforms added");
 
     await mongoose.disconnect();

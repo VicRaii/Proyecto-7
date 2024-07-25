@@ -4,14 +4,24 @@ const khPlatformSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     img: { type: String, required: true },
-    Games: [{ type: mongoose.Types.ObjectId, ref: "Games", required: false }],
+    KingdomHeartsGames: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "KingdomHeartsGames",
+        required: false,
+      },
+    ],
   },
   {
     timestamps: true,
-    collection: "khPlatform",
+    collection: "KingdomHeartsPlatforms",
   }
 );
 
-const khPlatform = mongoose.model("khPlatform", khPlatformSchema, "khPlatform");
+const KingdomHeartsPlatforms = mongoose.model(
+  "KingdomHeartsPlatforms",
+  khPlatformSchema,
+  "KingdomHeartsPlatforms"
+);
 
-module.exports = khPlatform;
+module.exports = KingdomHeartsPlatforms;

@@ -16,7 +16,7 @@ const khGamesSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    collection: "Games",
+    collection: "KingdomHeartsGames",
   }
 );
 
