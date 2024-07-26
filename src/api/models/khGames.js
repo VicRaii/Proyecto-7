@@ -12,7 +12,6 @@ const khGamesSchema = new mongoose.Schema(
       required: true,
       enum: ["Action-RPG", "JRPG", "Rol", "Musical", "Virtual-Reality"],
     },
-    verified: { type: Boolean, required: true, default: false },
   },
   {
     timestamps: true,

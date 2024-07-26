@@ -1,3 +1,4 @@
+const { isAdmin } = require("../../middlewares/auth");
 const {
   getKhPlatforms,
   getKhPlatformsById,
@@ -10,8 +11,8 @@ const khPlatformRouter = require("express").Router();
 
 khPlatformRouter.get("/", getKhPlatforms);
 khPlatformRouter.get("/:id", getKhPlatformsById);
-khPlatformRouter.post("/", postPlatforms);
-khPlatformRouter.put("/:id", updatePlatform);
-khPlatformRouter.delete("/:id", deletePlatform);
+khPlatformRouter.post("/", [isAdmin], postPlatforms);
+khPlatformRouter.put("/:id", [isAdmin], updatePlatform);
+khPlatformRouter.delete("/:id", [isAdmin], deletePlatform);
 
 module.exports = khPlatformRouter;
